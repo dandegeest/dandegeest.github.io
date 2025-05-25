@@ -1030,7 +1030,7 @@ footer {
 
 #project-content {
     padding: 100px 15px;
-    background: $background;
+    background: $base-color;
     color: $text;
 
     h2 {
@@ -1051,5 +1051,19 @@ footer {
     ul {
         color: $text;
         margin: 0 0 15px 0;
+    }
+
+    strong {
+        color: $highlight;
+    }
+
+    blockquote {
+        font-style: italic;
+        color: $text;
+        border-left: 4px solid $highlight;
+        padding-left: 20px;
+        margin: 30px 0;
+        font-size: 1.1em;
+        line-height: 1.6;
     }
 }
