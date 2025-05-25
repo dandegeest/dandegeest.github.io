@@ -40,7 +40,7 @@ $base-color: #020202;
 $base-color-hover: color.adjust($base-color, $lightness: -10%);
 
 // Define background colors
-$background: #fff;
+$background: #020202;
 $background-alt: #f2f2f5;
 
 // Define border colors
@@ -320,7 +320,7 @@ footer {
     position: relative;
     display: inline-block;
     font-size: 2em;
-    font-weight: 300;
+    font-weight: 500;
     margin: 0 0 30px 0;
 
     &:after {
@@ -447,8 +447,7 @@ footer {
 */
 
 #about {
-    padding: 75px 15px;
-    border-bottom: 1px solid $border;
+    padding: 100px 30px;
 
     h2 {
         color: $heading;
@@ -457,6 +456,7 @@ footer {
     p {
         color: $text;
         margin: 0;
+        font-size: 1.2em;
     }
 }
 
@@ -649,39 +649,40 @@ footer {
     overflow: hidden;
     background: #fff;
     border-radius: 4px;
-}
 
-.project-image {
-    float: left;
-    width: 300px;
-    height: 300px;
-    overflow: hidden;
+    &-image {
+        float: left;
+        width: 300px;
+        height: 300px;
+        overflow: hidden;
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-}
-
-.project-info {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    margin-left: 300px;
-    padding: 15px;
-
-    h3 {
-        font-size: 1.5em;
-        font-weight: 300;
-        color: $heading;
-        margin: 0 0 15px 0;
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     }
 
-    p {
-        color: $text;
-        margin: 0 0 15px 0;
-        font-size: 0.9em;
+    &-info {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 300px;
+        padding: 15px;
+        width: calc(100% - 330px);
+
+        h3 {
+            font-size: 1.5em;
+            font-weight: 300;
+            color: $heading;
+            margin: 0 0 15px 0;
+        }
+
+        p {
+            color: $text;
+            margin: 0 0 15px 0;
+            font-size: 0.9em;
+        }
     }
 }
 
