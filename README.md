@@ -5,6 +5,10 @@ This is my personal portfolio website showcasing my work as a Creative Technolog
 ## Site
 Visit the live site at [dandegeest.github.io](https://dandegeest.github.io)
 
+<div align="center">
+  <img src="images/degeest.github.io.png" alt="Portfolio Website Preview" width="300"/>
+</div>
+
 ## Repository Content
 - Interactive installations and digital art projects
 - Data visualization and generative art
