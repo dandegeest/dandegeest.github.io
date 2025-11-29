@@ -104,9 +104,17 @@ body {
 }
 
 a {
-    color: #79270e;
+    color: #4A90E2;
     text-decoration: none;
     font-weight: 800;
+
+    &:visited {
+        color: #7B68EE;
+    }
+
+    &:hover {
+        color: #2E5F99;
+    }
 }
 
 // No JS styles
@@ -409,7 +417,7 @@ footer {
     right: 0;
     bottom: 0;
     left: 0;
-    background: rgba($base-color-hover, 0.8);
+    background: rgba($base-color-hover, 0.5);
     z-index: 1;
 }
 
@@ -685,7 +693,7 @@ footer {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    margin-left: 300px;
+    margin-left: 520px;
     padding: 15px;
     background: rgba($base-color-hover, 0.8);
     border-radius: 4px;
