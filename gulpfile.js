@@ -6,6 +6,12 @@ const wait = require('gulp-wait');
 const babel = require('gulp-babel');
 const rename = require('gulp-rename');
 const autoprefixer = require('gulp-autoprefixer');
+const replace = require('gulp-replace');
+
+// Generate timestamp for cache busting
+function getTimestamp() {
+    return Math.floor(Date.now() / 1000);
+}
 
 function scripts() {
     return gulp.src('./js/scripts.js')
@@ -35,11 +41,28 @@ function styles() {
         .pipe(gulp.dest('./css'));
 }
 
+function cacheBust() {
+    const timestamp = getTimestamp();
+    const versionPattern = /\?v=[\d\.]+/g;
+    const newVersion = `?v=${timestamp}`;
+    
+    return gulp.src(['./index.html', './projects/*.html'])
+        .pipe(replace(versionPattern, newVersion))
+        .pipe(gulp.dest(function(file) {
+            return file.base;
+        }));
+}
+
+const build = gulp.series(styles, scripts, cacheBust);
+
 function watch() {
     gulp.watch('./js/scripts.js', scripts);
-    gulp.watch('./scss/styles.scss', styles);
+    gulp.watch('./scss/styles.scss', gulp.series(styles, cacheBust));
 }
 
 exports.scripts = scripts;
 exports.styles = styles;
+exports.cacheBust = cacheBust;
+exports.build = build;
 exports.watch = watch;
+exports.default = build;
