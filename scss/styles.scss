@@ -318,16 +318,24 @@ footer {
 
 .btn-rounded-white {
     display: inline-block;
-    color: #fff;
+    color: #fff !important;
     padding: 15px 25px;
     border: 3px solid #fff;
     border-radius: 30px;
     @include transition();
 
     &:hover {
-        color: $base-color;
+        color: $base-color !important;
         background: #fff;
         text-decoration: none;
+    }
+
+    &:visited {
+        color: #fff !important;
+    }
+
+    &:visited:hover {
+        color: $base-color !important;
     }
 }
 
