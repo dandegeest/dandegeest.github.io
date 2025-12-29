@@ -76,31 +76,54 @@
                 <div class="col-md-12">
                     <h2>Project Overview</h2>
                     <p>
-                        An interactive installation and projection mapping project created for a live musical performance, exploring the ethereal beauty of the Pink Moon through immersive visual elements and audience interaction. The setup featured two synchronized projectors casting layered visuals across the performance space, controlled via a custom Arduino interface that triggered visual transitions in response to both the music and performer inputs. The visuals combined pre-rendered animations with live graphic manipulation using Processing, allowing for real-time visual performance alongside the live music. This created a dynamic audiovisual experience where audience presence and sound influenced the visual atmosphere in subtle, poetic ways.
+                        <strong>Pink Moon</strong> was an independent study and fully solo effort, conceived and delivered in three months
+                        as an interactive installation and projection-mapping performance for a local band, staged inside an abandoned warehouse.
+                        The visuals were tailored specifically to the band’s sound, style, and lyrical themes, and were designed to be performed live
+                        as an instrument alongside the music.
                     </p>
-                    
+
                     <p>
-                        <a href="../docs/The Full Pink Moon Brief.pdf" target="_blank" class="btn-rounded-white">View Project Recap</a>
+                        The environment used <strong>two calibrated Panasonic projectors</strong> aimed and aligned to effectively double perceived
+                        brightness, creating layered imagery across the space. A desktop computer with an <strong>NVIDIA GPU</strong> drove the visual
+                        system, with <strong>Processing</strong> used for real-time graphics performance that blended pre-rendered animations with
+                        live manipulation and on-the-fly scene changes.
                     </p>
-                    
-                    <h3>Technical Details</h3>
+
+                    <p>
+                        Audience interaction was part of the show. I built a simple “treasure hunt” puzzle using custom open/close circuits:
+                        physical artifacts hidden around the space could be placed onto sensor stations to complete circuits and trigger transitions.
+                        A <strong>Raspberry Pi Pico</strong> read the sensor states and fed cues into the visual engine. I also built a custom
+                        live-performance control interface so I could improvise visuals in response to the band, the crowd, and the room’s energy.
+                    </p>
+
+                    <p>
+                        The production work extended well beyond software. I handled warehouse cleanout and prep, installation, cabling and signal routing
+                        including <strong>HDMI splitting for four separate displays</strong>, fabrication and build of a physical effigy element,
+                        and live-coding the performance in real time. Band member costumes were also designed to interact with the projections,
+                        so the performers themselves became moving surfaces within the piece.
+                    </p>
+
                     <ul>
-                        <li>Interactive Installation</li>
-                        <li>Projection Mapping</li>
-                        <li>Live Visual Performance</li>
-                        <li><a href="https://github.com/dandegeest/LCDeeD" target="_blank">View Code</a></li>               
-                    </ul>
-                    <ul class="project-skills">
-                        <li>Experience Design</li>
-                        <li>Projection Mapping</li>
-                        <li>Live Performance</li>
-                        <li>Fabrication</li>
-                        <li>Motion Graphics</li>
-                        <li>Image Processing</li>
-                        <li>Arduino</li>
-                        <li>Audience Interaction</li>
+                        <li><strong>Timeline:</strong> 3 months from concept to execution</li>
+                        <li><strong>Role:</strong> Solo, end-to-end (design, software, hardware, graphics, fabrication, site prep, install, live operation)</li>
+                        <li><strong>Tech:</strong> Processing, Arduino-style circuits, Raspberry Pi Pico, desktop PC with NVIDIA GPU</li>
+                        <li><strong>Projection:</strong> 2x Panasonic projectors, calibrated and aligned for layered output</li>
+                        <li><strong>Interaction:</strong> Physical artifact “puzzle” sensors (open/close circuits) triggering visual states</li>
+                        <li><strong>Video Routing:</strong> HDMI splitting to 4 displays</li>
+                        <li><strong>Live Performance:</strong> Custom control interface for improvising visuals with the music</li>
+                        <li><strong>Outcome:</strong> Stable live deployment, no failures during the performance</li>
                     </ul>
 
+                    <p>
+                        The result was a durable, site-specific audiovisual experience where sound, performer intent, and audience participation shaped
+                        the visual atmosphere in subtle ways, while staying tightly aligned to the band’s identity.
+                    </p>                    
+
+                    <p>
+                        <a href="../docs/The Full Pink Moon Brief.pdf" target="_blank" class="btn-rounded-white">View Project Recap</a>
+                        <a href="https://github.com/dandegeest/LCDeeD" target="_blank" class="btn-rounded-white">View Code</a>
+                    </p>
+                    
                     <div class="project-main-image">
                         <img src="../images/projects/pink-moon/PinkMain.jpg" alt="The Pink Moon Main Image" style="width: 100%; margin: 20px 0;" />
                         <img src="../images/projects/pink-moon/PinkMain1.jpg" alt="The Pink Moon Main Image 2" style="width: 100%; margin: 20px 0;" />
