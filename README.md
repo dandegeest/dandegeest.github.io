@@ -1,6 +1,6 @@
 # DAND:Made - Personal Portfolio Website
 
-This is my personal portfolio website showcasing my work as a Creative Technologist, Full Stack Developer, Artist, and Musician.
+This is my personal portfolio website showcasing my work as a Creative Technologist, Design Engineer, Artist, and Musician.
 
 ## Site
 Visit the live site at [dandegeest.github.io](https://dandegeest.github.io)
