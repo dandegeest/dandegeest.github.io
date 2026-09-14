@@ -688,6 +688,12 @@ footer {
     width: 100%;
     height: 300px;
     overflow: hidden;
+
+    a {
+        display: block;
+        height: 100%;
+        cursor: pointer;
+    }
     
     img {
         width: 100%;
@@ -705,6 +711,7 @@ footer {
     padding: 15px;
     background: rgba($base-color-hover, 0.8);
     border-radius: 4px;
+    pointer-events: none;
 
     h3 {
         font-size: 1.5em;
@@ -717,6 +724,10 @@ footer {
         color: $text;
         margin: 0 0 15px 0;
         font-size: 0.9em;
+    }
+
+    a {
+        pointer-events: auto;
     }
 }
 

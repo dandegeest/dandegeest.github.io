@@ -10,16 +10,19 @@
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
-    <link href="../css/bootstrap.min.css?v=1776026494" rel="stylesheet">
-    <link href="../css/styles.css?v=1776026494" rel="stylesheet">
-    <link href="../css/project-gallery.css?v=1776026494" rel="stylesheet">
+    <link href="../css/bootstrap.min.css?v=1778439100" rel="stylesheet">
+    <link href="../css/styles.css?v=1778439100" rel="stylesheet">
+    <link href="../css/project-gallery.css?v=1778439100" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
     <style>
         #lead {
-            background: url(../images/projects/synestr/synestr0.png) !important;
+            background: url(../images/projects/synestr/synestr5.png) !important;
             background-size: cover !important;
             background-position: center !important;
             background-repeat: no-repeat !important;
+        }
+        #lead-content h1 {
+            text-transform: none !important;
         }
     </style>
 </head>
@@ -56,7 +59,7 @@
     <div id="lead">
         <div id="lead-content">
             <h1>SynestR</h1>
-            <h2>A SYNESthetic insTRument Exploration</h2>
+            <h2>MIDI Sequencer and Synesthetic Instrument Framework</h2>
         </div>
         <!-- End #lead-content -->
 
@@ -76,41 +79,168 @@
             <div class="row">
                 <div class="col-md-12">
                     <p>
-                        An interactive Processing sketch that merges generative sound and visual systems into a responsive, multisensory instrument. 
-                        Designed to work with both mouse and touch input, the piece responds to tapping and dragging gestures, allowing participants 
-                        to actively shape rhythm, melody, and visual form through direct interaction.
-                    </p>
-                    <p>
-                        The system features a custom MIDI sequencing and playback engine built using the Java MIDI library, including synthesizers 
-                        and the MIDI sequencer. User interactions are recorded into looping sequences that employ quantization, ensuring rhythmic 
-                        coherence while still allowing expressive, improvisational input. As sequences evolve, audio events remain tightly 
-                        synchronized with generative visuals, creating a cohesive audio-visual performance space.
-                    </p>
-                    <p>
-                        To support rapid experimentation, I designed an object-oriented framework that abstracts away low-level MIDI concerns such 
-                        as timing, playback, and device management. This structure made it easy to prototype and explore new “synestrument” ideas 
-                        without rewriting core sequencing logic, enabling fast iteration on interaction models, sound behaviors, and visual responses.
-                    </p>
-                    <p>
-                        The result is an algorithmically driven composition environment that explores the relationship between sound, code, gesture, 
-                        and visual form, emphasizing play, discovery, and real-time feedback.
+                        <strong>SynestR</strong> is a software sequencer and instrument framework written in <a href="https://processing.org" target="_blank">Processing</a>. It is not a sketch that plays a sample when you click. It is a 16-channel MIDI performance environment: a Gervill General MIDI synthesizer, a looping 4-track / 32-step sequencer, live note recording with program-change and note-off events, and a plugin architecture for building new “synestruments” without touching the engine.
                     </p>
 
+                    <p>
+                        The brief was to make an audiovisual instrument whose audio and visual modalities are equally expressive — easy to learn, inexhaustible in play. The reference point was Brian Eno and Peter Chilvers’ <em>Bloom</em>: tap, and a circle grows while a tone evolves. SynestR takes that coupling seriously and then goes further. Every gesture writes MIDI. Every MIDI event draws. Hold duration becomes note length. Drag speed becomes velocity. A bouncing ball is a generative phrase generator. A row of stained-glass pixels is an FFT that you can play.
+                    </p>
+
+                    <blockquote>
+                        Create an open-ended system where the audio and visual modalities are equally expressive. Its results should be inexhaustible, deeply variable, and dependent on the performer's choices.
+                    </blockquote>
+
+                    <p>
+                        <a href="https://github.com/dandegeest/SynestR" target="_blank" class="btn-rounded-white">View Code</a>
+                    </p>
+
+                    <dl class="project-spec-grid">
+                        <div>
+                            <dt>Engine</dt>
+                            <dd>Java Sound API + Gervill</dd>
+                        </div>
+                        <div>
+                            <dt>Voices</dt>
+                            <dd>16 channels × 128 GM patches</dd>
+                        </div>
+                        <div>
+                            <dt>Sequencer</dt>
+                            <dd>4 tracks × 32 steps, looping</dd>
+                        </div>
+                        <div>
+                            <dt>Timing</dt>
+                            <dd>PPQ MIDI, live BPM</dd>
+                        </div>
+                        <div>
+                            <dt>I/O</dt>
+                            <dd>Soft synth, MIDI out, serial</dd>
+                        </div>
+                        <div>
+                            <dt>Range</dt>
+                            <dd>MIDI 36–84 · Ch. 9 percussion</dd>
+                        </div>
+                    </dl>
+
+                    <h3>MIDI engine</h3>
+                    <p>
+                        Playback is the JDK’s Gervill software synthesizer, addressed through <code>javax.sound.midi</code>. Each channel holds a patch index and display name; channel 9 is locked to the General MIDI percussion kit. Left/right arrows (or a right-click sweep across the 128-instrument map) send bank-select CC and a program-change, then preview middle C so you hear the new voice immediately.
+                    </p>
+                    <p>
+                        Notes fire on two paths at once: <code>Synthesizer.getChannels()[ch].noteOn</code> for local Gervill audio, and <code>Receiver.send(ShortMessage)</code> for whatever MIDI device is selected — Gervill, loopMIDI, or hardware like a Novation Circuit Tracks. That dual send means a synestrument can be a soft instrument <em>or</em> a controller for a hardware rack without changing a line of performance code.
+                    </p>
+                    <p>
+                        Visual notes are MIDI objects. Pitch maps to color across the 36–84 range. Remaining duration maps to radius and opacity, so a held note blooms like <em>Bloom</em> and collapses on note-off. Hovering a circle shows velocity. Panic (<kbd>0</kbd>) all-notes-off clears sounding voices and the draw list together.
+                    </p>
+
+                    <h3>4 × 32 sequencer</h3>
+                    <p>
+                        The transport is a real Java <code>Sequencer</code>, not a <code>millis()</code> loop pretending to be one. A <code>Sequence</code> is created at PPQ resolution 4 with four tracks padded to 32 ticks so the loop length is stable. Play sets <code>LOOP_CONTINUOUSLY</code>. Mouse wheel sets BPM via <code>setTempoFactor(bpm / 120)</code>. Up/down arrows select the record track. Clicking the strip sets the write head.
+                    </p>
+                    <p>
+                        Record (<kbd>R</kbd>) is live capture, not step-grid painting. On note-off, the engine writes three events onto the current track at the current tick: a program-change (so the loop recalls the patch you were on), a note-on with velocity, and a note-off at <code>tick + duration</code>. If the sequencer is running, duration is the tick delta from mouse-down — wrapping correctly if the playhead crosses the loop. If it is stopped, hold time is converted through milliseconds-per-tick and clamped to the remaining steps. The strip draws occupied steps in pitch-mapped color and a live playhead; a red LED sits on the armed track while recording. Clear (<kbd>C</kbd>) deletes every track and rebuilds an empty 32-step sequence.
+                    </p>
+
+                    <div class="project-ui-shots">
+                        <figure>
+                            <a href="../images/projects/synestr/overview.png" class="glightbox" data-gallery="synestr-ui">
+                                <img src="../images/projects/synestr/overview.png" alt="Keyano overview: 16 MIDI channels, active piano row, and 32-step sequencer" />
+                            </a>
+                            <figcaption>Keyano — 16 MIDI channels on the Y axis, pitch on X, 32-step sequencer along the bottom. R records, P loops playback.</figcaption>
+                        </figure>
+                    </div>
+
+                    <h3>Synestrument framework</h3>
+                    <p>
+                        The interesting part is not the five included instruments. It is that they all subclass <code>Synestrument</code>. The base class owns bounds, name, <code>getNote</code> / <code>getChannel</code> mapping, and empty mouse/key hooks. A new instrument is a tab: override <code>display()</code> and the gestures, add it to the <code>syns</code> list, cycle with <kbd>Q</kbd>. Recording, patch changes, serial pitch-bend, and the note bloom layer stay in the engine. That is how Keyano, a bezier guitar, a circle-of-fifths wheel, a physics drone, and an image FFT can share one sequencer.
+                    </p>
+
+                    <div class="project-instrument-grid">
+                        <figure>
+                            <a href="../images/projects/synestr/synestr1.png" class="glightbox" data-gallery="synestr-instruments">
+                                <img src="../images/projects/synestr/synestr1.png" alt="Keyano: 16-channel piano grid with C4 highlighted" />
+                            </a>
+                            <figcaption>
+                                <strong>Keyano</strong>
+                                Sixteen stacked channels. X is MIDI 36–84 with C highlighted gold; Y is channel. Click to play, drag for velocity from mouse speed, right-click to scrub 128 patches. Channel 9 is the GM drum kit.
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <a href="../images/projects/synestr/synestr2.png" class="glightbox" data-gallery="synestr-instruments">
+                                <img src="../images/projects/synestr/synestr2.png" alt="BeZtar: sixteen bezier strings with blooming note circles" />
+                            </a>
+                            <figcaption>
+                                <strong>BeZtar</strong>
+                                Sixteen strummable bezier strings, one per MIDI channel. Pitch lives on Y; only natural notes fire. The curve is a live control point — strum across strings, hold for duration, each channel keeps its own patch.
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <a href="../images/projects/synestr/synestr3.png" class="glightbox" data-gallery="synestr-instruments">
+                                <img src="../images/projects/synestr/synestr3.png" alt="FekCOF circle of fifths wheel with octave and channel bars" />
+                            </a>
+                            <figcaption>
+                                <strong>FekCOF</strong>
+                                Circle of fifths as a playable wheel: C, G, D, A, E, B, F#, Db, Ab, Eb, Bb, F. <kbd>1</kbd> toggles single notes vs. three-note chords (root, fifth, relative). Side bars set octave; the top strip selects channel. Chord tones can octave-decay and retrigger as they bloom.
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <a href="../images/projects/synestr/bawler.png" class="glightbox" data-gallery="synestr-instruments">
+                                <img src="../images/projects/synestr/bawler.png" alt="BaWler generative bouncing note circles" />
+                            </a>
+                            <figcaption>
+                                <strong>BaWler</strong>
+                                Physics as sequencer. A bawl is a MIDI note with gravity, wall bounce, and 0.8 ground damp. Each landing retriggers; hold time sets radius. Right-click drops a circle-of-fifths chord. Mouse wheel over a bawl rides its velocity.
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <a href="../images/projects/synestr/synestr5.png" class="glightbox" data-gallery="synestr-instruments">
+                                <img src="../images/projects/synestr/synestr5.png" alt="Pixelah: stained glass image with FFT spectrum mapped to MIDI" />
+                            </a>
+                            <figcaption>
+                                <strong>Pixelah</strong>
+                                A row of pixels becomes a time-domain signal. Minim FFT (Gaussian window) maps red, green, blue, or brightness into MIDI 36–84. Y selects channel; click-hold sets band skip and play direction. The spectrum is the score.
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <a href="../images/projects/synestr/synestr4.png" class="glightbox" data-gallery="synestr-instruments">
+                                <img src="../images/projects/synestr/synestr4.png" alt="Keyano with blooming note circles over the piano grid" />
+                            </a>
+                            <figcaption>
+                                <strong>Bloom layer</strong>
+                                Every sounding note is a circle. Color is pitch, radius is remaining duration, fill collapses toward note-off. Audio and image are the same object in the same clock.
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <h3>Serial and hardware</h3>
+                    <p>
+                        The sketch opens a serial port and parses live commands. <code>BEND</code> maps a 0–1023 sensor into pitch-bend around the MIDI center of 8192, then writes it to the active synestrument’s channel (resetting the previous channel so bends do not stick). Control-change stubs are ready for knobs. That path is how physical experiments — including my <a href="https://github.com/dandegeest/BounceHouse" target="_blank">BounceHouse</a> MicroPython / Pico work — hook into the same sequencer the mouse is using.
+                    </p>
+
+                    <h3>Keys</h3>
+                    <ul class="project-keybinds">
+                        <li><kbd>Q</kbd> Cycle synestruments</li>
+                        <li><kbd>K</kbd> Jump to Keyano</li>
+                        <li><kbd>R</kbd> Arm / disarm record</li>
+                        <li><kbd>P</kbd> Play / stop loop</li>
+                        <li><kbd>C</kbd> Clear sequence</li>
+                        <li><kbd>0</kbd> All notes off</li>
+                        <li><kbd>← →</kbd> Patch · step while recording</li>
+                        <li><kbd>↑ ↓</kbd> Sequencer track</li>
+                        <li><kbd>Wheel</kbd> BPM</li>
+                        <li><kbd>B</kbd> Pitch-bend mode</li>
+                        <li><kbd>1</kbd> FekCOF chord / note</li>
+                        <li><kbd>Enter</kbd> Save frame</li>
+                    </ul>
+
                     <div class="project-gallery">
-                        <a href="../images/projects/synestr/synestr1.png" class="glightbox" data-gallery="synestr-gallery">
-                            <img src="../images/projects/synestr/synestr1.png" alt="SynestR Gallery Image 1" style="width: 100%; display: block; margin-bottom: 20px;" />
+                        <a href="../images/projects/synestr/keyano.png" class="glightbox" data-gallery="synestr-gallery">
+                            <img src="../images/projects/synestr/keyano.png" alt="Keyano piano grid with numbered 32-step sequencer" />
                         </a>
-                        <a href="../images/projects/synestr/synestr2.png" class="glightbox" data-gallery="synestr-gallery">
-                            <img src="../images/projects/synestr/synestr2.png" alt="SynestR Gallery Image 2" style="width: 100%; display: block; margin-bottom: 20px;" />
+                        <a href="../images/projects/synestr/beztar.png" class="glightbox" data-gallery="synestr-gallery">
+                            <img src="../images/projects/synestr/beztar.png" alt="BeZtar bezier strings over the sequencer strip" />
                         </a>
-                        <a href="../images/projects/synestr/synestr3.png" class="glightbox" data-gallery="synestr-gallery">
-                            <img src="../images/projects/synestr/synestr3.png" alt="SynestR Gallery Image 3" style="width: 100%; display: block; margin-bottom: 20px;" />
-                        </a>
-                        <a href="../images/projects/synestr/synestr4.png" class="glightbox" data-gallery="synestr-gallery">
-                            <img src="../images/projects/synestr/synestr4.png" alt="SynestR Gallery Image 4" style="width: 100%; display: block; margin-bottom: 20px;" />
-                        </a>
-                        <a href="../images/projects/synestr/synestr5.png" class="glightbox" data-gallery="synestr-gallery">
-                            <img src="../images/projects/synestr/synestr5.png" alt="SynestR Gallery Image 5" style="width: 100%; display: block; margin-bottom: 20px;" />
+                        <a href="../images/projects/synestr/fekcof.png" class="glightbox" data-gallery="synestr-gallery">
+                            <img src="../images/projects/synestr/fekcof.png" alt="FekCOF labeled circle of fifths with octave and channel controls" />
                         </a>
                     </div>
                 </div>
@@ -153,4 +283,4 @@
     <script>const lightbox = GLightbox();</script>
 </body>
 
-</html> 
+</html>

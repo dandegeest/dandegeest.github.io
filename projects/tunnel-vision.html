@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TunnelVision - DAND:Made</title>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
+    <link href="../css/bootstrap.min.css?v=1778438400" rel="stylesheet">
+    <link href="../css/styles.css?v=1778438400" rel="stylesheet">
+    <link href="../css/project-gallery.css?v=1778438400" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    <style>
+        #lead {
+            background: url(../images/projects/tunnel-vision/hero.png) !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+        }
+        #lead-content h1 {
+            text-transform: none !important;
+        }
+    </style>
+</head>
+
+<body class="project-page">
+    <div id="mobile-menu-open" class="shadow-large">
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </div>
+    <!-- End #mobile-menu-toggle -->
+    <header>
+        <div id="mobile-menu-close">
+            <span>Close</span> <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
+        <ul id="menu" class="shadow">
+            <li>
+                <a href="../index.html#about">About</a>
+            </li>
+            <li>
+                <a href="../index.html#projects">Projects</a>
+            </li>
+            <li>
+                <a href="../index.html#contact">Contact</a>
+            </li>
+            <li>
+                <a href="../index.html#resume">Resume</a>
+            </li>
+            <li>
+                <a href="../index.html#projects">Back</a>
+            </li>
+        </ul>
+    </header>
+    <!-- End header -->
+
+    <div id="lead">
+        <div id="lead-content">
+            <h1>TunnelVision</h1>
+            <h2>AI Filmmaking System</h2>
+        </div>
+        <!-- End #lead-content -->
+
+        <div id="lead-overlay"></div>
+
+        <div id="lead-down">
+            <span>
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </span>
+        </div>
+        <!-- End #lead-down -->
+    </div>
+    <!-- End #lead -->
+
+    <div id="project-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <strong>TunnelVision</strong> is an AI filmmaking system for directing continuous first-person journeys through imagined worlds. It is not a prompt wrapper around a video model. The filmmaker specifies a journey; a Director structures the destinations; a Cinematographer figures out how to physically shoot each traversal; Camotion prepares motion-conditioned endpoint frames; and a video model films the camera travel between canonical viewpoints.
+                    </p>
+
+                    <p>
+                        The concept originated with filmmaker <a href="https://www.youtube.com/playlist?list=PLFvZSyakEnVPu2B2KTGf1sKUwMExSl6kk" target="_blank"><strong>Terran Boylan</strong></a>, who developed the original TunnelVision technique as a manual generative filmmaking workflow—selecting successive stills so a first-person camera appears to move through a coherent environment. That technique was later adapted for the Peter Gabriel <a href="digging-in-the-dirt.html">Digging in the Dirt</a> 50:50.dev project, where we used the playful name <strong>TunnelTV</strong>. This research asks what happens if that process becomes self-directing.
+                    </p>
+
+                    <blockquote>
+                        Preserve the world's rules while changing the viewer's question.
+                    </blockquote>
+
+                    <p>
+                        The current product workspace is <strong>Plan | Shoot</strong>. There is no edit suite. If the Director produces a sequence of canonical destinations and the Cinematographer films those legs with shared anchors and continuous locomotion, the finished journey is already the edit. The working loop is SPECIFY → DIRECT → CONSTRUCT → SHOOT. Research Phase 1 is complete; product development is underway, with assembled journeys through greenhouse interiors, Gravity City, forest tunnels, and the Wardrobe Loop.
+                    </p>
+
+                    <p>
+                        This work is groundwork for an agentic filmmaking project at the <a href="https://hackathon.runway.com/" target="_blank">Runway Hackathon</a>.
+                    </p>
+
+                    <p>
+                        <a href="https://dandegeest.github.io/TunnelVision/" target="_blank" class="btn-rounded-white">Visit TunnelVision Site</a>
+                        <a href="https://github.com/dandegeest/TunnelVision" target="_blank" class="btn-rounded-white">View Code</a>
+                    </p>
+
+                    <div class="video-container" style="position: relative; width: 100%; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 30px 0;">
+                        <video style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" controls playsinline>
+                            <source src="../images/projects/tunnel-vision/gravity-city.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <div class="project-ui-shots">
+                        <figure>
+                            <a href="../images/projects/tunnel-vision/plan-workspace.png" class="glightbox" data-gallery="tunnel-vision-ui">
+                                <img src="../images/projects/tunnel-vision/plan-workspace.png" alt="TunnelVision Plan workspace: Gravity City storyboard with CREATE JOURNEY" />
+                            </a>
+                            <figcaption>Plan — Gravity City storyboard, journey prompt, and CREATE JOURNEY</figcaption>
+                        </figure>
+                        <figure>
+                            <a href="../images/projects/tunnel-vision/shoot-workspace.jpg" class="glightbox" data-gallery="tunnel-vision-ui">
+                                <img src="../images/projects/tunnel-vision/shoot-workspace.jpg" alt="TunnelVision Shoot workspace: motion preview, Camotion overlay, and RESHOOT" />
+                            </a>
+                            <figcaption>Shoot — motion preview, Camotion overlay, and RESHOOT</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="project-video-gallery">
+                        <video controls playsinline>
+                            <source src="../images/projects/tunnel-vision/tunnelvision-kling.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls playsinline>
+                            <source src="../images/projects/tunnel-vision/deers.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls playsinline>
+                            <source src="../images/projects/tunnel-vision/oz.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls playsinline>
+                            <source src="../images/projects/tunnel-vision/saylorvillian.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls playsinline>
+                            <source src="../images/projects/tunnel-vision/welcome2zungle.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls playsinline>
+                            <source src="../images/projects/tunnel-vision/amusese25.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls playsinline>
+                            <source src="../images/projects/tunnel-vision/hauntsee2fast.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls playsinline>
+                            <source src="../images/projects/tunnel-vision/nightmuse.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls playsinline>
+                            <source src="../images/projects/tunnel-vision/wrongwaymo-seed2fast.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <video controls playsinline>
+                            <source src="../images/projects/tunnel-vision/piphd.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <div class="project-gallery">
+                        <a href="../images/projects/tunnel-vision/forest-a.jpg" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/forest-a.jpg" alt="Forest destination A: mossy roots, glowing mushrooms, and a first-person path into the trees" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/forest-b.png" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/forest-b.png" alt="Forest destination B: cave mouth with glowing mushrooms and hanging roots" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/forest-c.png" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/forest-c.png" alt="Forest destination C: organic root-and-fern tube" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/forest-d.png" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/forest-d.png" alt="Forest destination D: glowing crystal chamber" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/forest-e.png" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/forest-e.png" alt="Forest destination E: vertical portal of light between stone walls" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/forest-f.png" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/forest-f.png" alt="Forest destination F: open void with floating rocks and a distant sun" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/wardrobe-a.jpg" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/wardrobe-a.jpg" alt="Wardrobe Loop destination A: attic bedroom looking at an open wardrobe" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/wardrobe-b.jpg" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/wardrobe-b.jpg" alt="Wardrobe Loop destination B: winter forest" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/wardrobe-c.jpg" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/wardrobe-c.jpg" alt="Wardrobe Loop destination C: stone arch" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/wardrobe-d.jpg" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/wardrobe-d.jpg" alt="Wardrobe Loop destination D: stair portal" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/wardrobe-e.jpg" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/wardrobe-e.jpg" alt="Wardrobe Loop destination E: cavern door" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/deer-a.png" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/deer-a.png" alt="Deer forest destination A: sunlit path with birds, foxgloves, and a stream" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/deer-b.png" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/deer-b.png" alt="Deer forest destination B: denser path with two deer running ahead" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/deer-c.png" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/deer-c.png" alt="Deer forest destination C: dusk lakeshore with deer on the far bank" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/deer-d.png" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/deer-d.png" alt="Deer forest destination D: first-person in tall grass at dusk as deer run away" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/greenhouse-camotion.jpg" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/greenhouse-camotion.jpg" alt="Camotion-conditioned greenhouse shooting frame with radial forward motion" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/exploration-start.jpg" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/exploration-start.jpg" alt="Prototype exploration starting frame: sandstone cave looking toward daylight" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/exploration-ravine.jpg" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/exploration-ravine.jpg" alt="Chosen prototype frame B: forest ravine with eroded walls and exposed roots" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/ghost-library.jpeg" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/ghost-library.jpeg" alt="Ghost Library fixture used in Camotion motion-conditioning research" />
+                        </a>
+                        <a href="../images/projects/tunnel-vision/photographic-a.jpg" class="glightbox" data-gallery="tunnel-vision-gallery">
+                            <img src="../images/projects/tunnel-vision/photographic-a.jpg" alt="Filmmaker-supplied photographic starting frame: causeway over water with a car ahead" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End #project-content -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 copyright">
+                    <p>
+                        Copyright &copy; <span id="current-year">2025</span> Dan DeGeest
+                    </p>
+                </div>
+                <div class="col-sm-2 top">
+                    <span id="to-top">
+                        <i class="fa fa-chevron-up" aria-hidden="true"></i>
+                    </span>
+                </div>
+                <div class="col-sm-5 social">
+                    <ul>
+                        <li>
+                            <a href="https://github.com/dandegeest" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/dan-degeest-0923731/" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End footer -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../js/scripts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox"></script>
+    <script>const lightbox = GLightbox();</script>
+</body>
+
+</html>

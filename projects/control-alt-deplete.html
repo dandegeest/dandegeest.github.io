@@ -10,9 +10,9 @@
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
     <link rel="stylesheet" href="../libs/font-awesome/css/font-awesome.min.css">
-    <link href="../css/bootstrap.min.css?v=1776026494" rel="stylesheet">
-    <link href="../css/styles.css?v=1776026494" rel="stylesheet">
-    <link href="../css/project-gallery.css?v=1776026494" rel="stylesheet">
+    <link href="../css/bootstrap.min.css?v=1778439200" rel="stylesheet">
+    <link href="../css/styles.css?v=1778439200" rel="stylesheet">
+    <link href="../css/project-gallery.css?v=1778439200" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
     <style>
         #lead {
@@ -20,6 +20,9 @@
             background-size: cover !important;
             background-position: center !important;
             background-repeat: no-repeat !important;
+        }
+        #lead-content h1 {
+            text-transform: none !important;
         }
     </style>
 </head>
@@ -56,7 +59,7 @@
     <div id="lead">
         <div id="lead-content">
             <h1>Control+Alt+Deplete</h1>
-            <h2>Interactive Sound Installation</h2>
+            <h2>MIDI-Controlled E-Waste Sound Sculpture</h2>
         </div>
         <!-- End #lead-content -->
 
@@ -76,28 +79,107 @@
             <div class="row">
                 <div class="col-md-12">
                     <p>
-                    An interactive sound sculpture installation exploring themes of electronic waste, planned obsolescence, and environmental decay. The piece depicts a dead tree mutating with discarded electronics and post-consumer trash, emerging from a simulated landfill as a dystopian monument to overconsumption.
+                        <strong>Control+Alt+Deplete</strong> is a MIDI-controlled sound sculpture built from a dead tree and discarded electronics. Touch is not a button that plays a file. Two analog sensors on the trunk write a serial stream; a Processing sketch turns those voltages into MIDI Control Change messages on a virtual loopMIDI port named <code>MiDDi</code>; a live <a href="https://strudel.cc/?EqzoQ2WHfCU8" target="_blank">Strudel</a> patch with Hydra visuals reads those CCs as gain, delay, speed, and speech. The tree is the mixer.
                     </p>
 
                     <p>
-                    Developed over a three-month period by a three-person team, the installation was designed for unattended operation and user-driven exploration during a three-day public exhibition at Iowa State University’s Student Innovation Center. Audience interaction was intentionally subtle and discoverable, encouraging curiosity and repeated engagement rather than explicit instruction.
+                        It was a three-person studio project — Leah Johnson, Alyssa Beltman, and me — for Iowa State’s DSN S 5460 / <a href="https://iowasteland.com/sage/" target="_blank">At Capacity</a> exhibition. I designed the sensor hardware, Arduino firmware, Processing MIDI bridge, Strudel score, and the unattended show computer. They built the sculpture with me: a tree found dead near campus, mounted to a pallet, mutated with motherboards, cables, crochet, ceramics, and a fused PD8 power harness. Three days in the Student Innovation Center atrium. No attendant. Interaction was meant to be discovered, not labeled.
                     </p>
 
-                    <p>
-                    I was responsible for all hardware and software systems, including sensor design, interaction logic, sound design, MIDI systems, and generative behavior. Physical interactions triggered sound playback and sent continuous MIDI control values that dynamically altered audio and visual output in real time. The sculpture incorporated voice synthesis to speak phrases such as “Control,” “Alt,” “Depleted,” and “Planned Obsolescence,” reinforcing the conceptual tone.
-                    </p>
-
-                    <p>
-                    The entire structure was fabricated from recycled and found materials, using a dead tree as the primary framework. Technology included Raspberry Pi, a dedicated mini PC, custom sensor circuits, addressable LED strips, and a real-time audiovisual pipeline built with Processing, MIDI, and Strudel.js. Generative AI tools were used during early concept ideation and visual iteration.
-                    </p>
-
-                    <p>
-                    The installation was set up in a single day, operated reliably throughout the exhibition without failure, and required no onsite supervision once live.
-                    </p>
+                    <blockquote>
+                        A solitary tree mutated with electronic waste, emerging from a landfill — a monument to overconsumption that you can play.
+                    </blockquote>
 
                     <p>
                         <a href="https://iowasteland.com/sage/" target="_blank" class="btn-rounded-white">View Project</a>
                         <a href="https://github.com/dandegeest/CtrlAltDeplete" target="_blank" class="btn-rounded-white">View Code</a>
+                        <a href="https://strudel.cc/?EqzoQ2WHfCU8" target="_blank" class="btn-rounded-white">Open Strudel Patch</a>
+                    </p>
+
+                    <dl class="project-spec-grid">
+                        <div>
+                            <dt>Sensors</dt>
+                            <dd>2 analog · Arduino A0 / A1</dd>
+                        </div>
+                        <div>
+                            <dt>Bridge</dt>
+                            <dd>Processing → loopMIDI</dd>
+                        </div>
+                        <div>
+                            <dt>Voice</dt>
+                            <dd>Strudel + Hydra</dd>
+                        </div>
+                        <div>
+                            <dt>MIDI</dt>
+                            <dd>CC1–5 on MiDDi</dd>
+                        </div>
+                        <div>
+                            <dt>LEDs</dt>
+                            <dd>120 RGB + 250 RGBW</dd>
+                        </div>
+                        <div>
+                            <dt>Show</dt>
+                            <dd>3 days unattended · ISU</dd>
+                        </div>
+                    </dl>
+
+                    <h3>The pipeline</h3>
+                    <p>
+                        Physical → serial → MIDI CC → live code. Nothing in the sound engine knows about a tree. The Arduino only knows two ADC channels and two NeoPixel strips. Processing only knows a COM port and a MIDI receiver. Strudel only knows <code>midin('MiDDi')</code>. That split is what made the piece rehearsable: I could drag a mouse in the HUD when the sculpture was in the shop, then drop the same patch onto the show machine with the sensors live.
+                    </p>
+
+                    <div class="project-ui-shots">
+                        <figure>
+                            <a href="../images/projects/control-alt-deplete/soundscape.png" class="glightbox" data-gallery="cad-ui">
+                                <img src="../images/projects/control-alt-deplete/soundscape.png" alt="Strudel patch, loopMIDI MiDDi port, and Processing MIDI Controller HUD running together" />
+                            </a>
+                            <figcaption>Show stack — Strudel reading MiDDi, loopMIDI carrying 288k MIDI events, Processing HUD with CC1–5 meters and a Sensor 1 trigger.</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="project-instrument-grid">
+                        <figure>
+                            <a href="../images/projects/control-alt-deplete/cad0.png" class="glightbox" data-gallery="cad-stack">
+                                <img src="../images/projects/control-alt-deplete/cad0.png" alt="PD8 fused power distribution and green NeoPixel strip wrapped around the tree" />
+                            </a>
+                            <figcaption>
+                                <strong>Arduino · Control.ino</strong>
+                                <code>analogRead(A0)</code> and <code>A1</code> stream <code>sensor1:sensor2</code> at 9600 baud every loop. Thresholds fire NeoPixel color-wipes: strip 1 (120 RGB, pin 3) runs a red → magenta → steel → cyan → brown → black sequence when sensor 1 drops below 50; strip 2 (250 RGBW, pin 6) wipes two random colors then reverses to black when sensor 2 exceeds 100. Non-blocking <code>millis()</code> updates at 10 ms so serial never stalls.
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <a href="../images/projects/control-alt-deplete/soundscape.png" class="glightbox" data-gallery="cad-stack">
+                                <img src="../images/projects/control-alt-deplete/soundscape.png" alt="Processing MIDI Controller HUD with CC meters and serial status" />
+                            </a>
+                            <figcaption>
+                                <strong>Processing · Deplete.pde</strong>
+                                Opens the loopMIDI port <code>MiDDi</code> and sends <code>ShortMessage.CONTROL_CHANGE</code> on channel 0. Serial values lerp into a HUD; crossing a trigger (sensor 1 &lt; 50 or sensor 2 &gt; 1050) fires a random CC1 (10–127), then after two seconds sends CC1 = 0 so the patch decays instead of sticking open. Keys <kbd>1</kbd>–<kbd>5</kbd> select a CC; drag Y maps 0–127 for rehearsal without hardware.
+                            </figcaption>
+                        </figure>
+                        <figure>
+                            <a href="../images/projects/control-alt-deplete/deplete-hud.png" class="glightbox" data-gallery="cad-stack">
+                                <img src="../images/projects/control-alt-deplete/deplete-hud.png" alt="Strudel code over a Hydra kaleidoscope visual" />
+                            </a>
+                            <figcaption>
+                                <strong>Strudel + Hydra</strong>
+                                <code>speechda</code> synthesizes Control, Alt, Deplete, At Capacity, Planned Obsolescence, Disposable, Solid Waste in an en-GB male voice. A stacked pattern maps CC1 to master gain, CC2 to delay, CC3 to delay time, CC4 to speed, CC5 to slow. Underneath: an F1 sine, a countdown, and a crate of didgeridoo / wind / metal / crow / fret-noise / mark-trees with bitcrush. Hydra <code>osc</code> → <code>modulateScale</code> → <code>modulateKaleid</code> is fed by the same audio.
+                            </figcaption>
+                        </figure>
+                    </div>
+
+                    <h3>MIDI map</h3>
+                    <ul class="project-keybinds">
+                        <li><kbd>CC1</kbd> Master gain</li>
+                        <li><kbd>CC2</kbd> Delay amount</li>
+                        <li><kbd>CC3</kbd> Delay time</li>
+                        <li><kbd>CC4</kbd> Speed (−1…2)</li>
+                        <li><kbd>CC5</kbd> Slow (1…5)</li>
+                        <li><kbd>1–5</kbd> Select CC in HUD</li>
+                    </ul>
+
+                    <h3>Sculpture as circuit</h3>
+                    <p>
+                        The tree is the enclosure. A dead trunk on a reclaimed-lumber cradle, power distributed through a fused PD8 so LED strips, fans, and a mini-PC could share one scavenged supply without taking the show down. Wires become roots. A yellow toy, a gutted RCA remote, a motherboard at the base — all found, all load-bearing as both material and metaphor. Sensors hide in the canopy so a visitor leaning in or brushing a branch is the gesture. The voice of the piece says the words the objects already know: depleted, disposable, planned obsolescence.
                     </p>
 
                     <div class="video-container" style="margin: 20px 0;">
@@ -106,97 +188,97 @@
                             Your browser does not support the video tag.
                         </video>
                     </div>
- 
+
                     <div class="project-gallery">
-                        <a href="../images/projects/control-alt-deplete/cad0.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad0.png" alt="Control Alt Deplete Full Size" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad1.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad1.jpg" alt="Control Alt Deplete Installation 1" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad2.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad2.jpg" alt="Control Alt Deplete Installation 2" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad3.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad3.jpg" alt="Control Alt Deplete Installation 3" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad4.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad4.jpg" alt="Control Alt Deplete Installation 4" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad5.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad5.jpg" alt="Control Alt Deplete Installation 5" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad6.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad6.jpg" alt="Control Alt Deplete Installation 6" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad7.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad7.jpg" alt="Control Alt Deplete Installation 7" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad8.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad8.jpg" alt="Control Alt Deplete Installation 8" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad9.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad9.jpg" alt="Control Alt Deplete Installation 9" />
-                        </a>
                         <a href="../images/projects/control-alt-deplete/cad10.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad10.jpg" alt="Control Alt Deplete Installation 10" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad11.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad11.jpg" alt="Control Alt Deplete Installation 11" />
+                            <img src="../images/projects/control-alt-deplete/cad10.jpg" alt="Dead tree on a pallet, wired with e-waste, motherboard, and cables at the base" />
                         </a>
                         <a href="../images/projects/control-alt-deplete/cad12.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad12.jpg" alt="Control Alt Deplete Installation 12" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad13.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad13.jpg" alt="Control Alt Deplete Installation 13" />
+                            <img src="../images/projects/control-alt-deplete/cad12.jpg" alt="Installed in the Student Innovation Center atrium with hanging crochet and floor prints" />
                         </a>
                         <a href="../images/projects/control-alt-deplete/cad14.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad14.jpg" alt="Control Alt Deplete Installation 14" />
+                            <img src="../images/projects/control-alt-deplete/cad14.jpg" alt="Atrium view from the stairs: the tree under neon rings" />
                         </a>
                         <a href="../images/projects/control-alt-deplete/cad15.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad15.jpg" alt="Control Alt Deplete Installation 15" />
+                            <img src="../images/projects/control-alt-deplete/cad15.jpg" alt="Canopy detail: yellow toy, NeoPixel strip, and circuit boards in the branches" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad0.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad0.png" alt="PD8 fused power distribution and green LED strip on the trunk" />
                         </a>
                         <a href="../images/projects/control-alt-deplete/cad16.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad16.jpg" alt="Control Alt Deplete Installation 16" />
+                            <img src="../images/projects/control-alt-deplete/cad16.jpg" alt="Trunk wiring: PD8 boards, zip-tied cables, and LED strip" />
                         </a>
-                        <a href="../images/projects/control-alt-deplete/cad17.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad17.jpg" alt="Control Alt Deplete Installation 17" />
+                        <a href="../images/projects/control-alt-deplete/cad8.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad8.jpg" alt="Base build: motherboard, fan, and cables on the pallet cradle" />
                         </a>
-                        <a href="../images/projects/control-alt-deplete/cad19.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad19.png" alt="Control Alt Deplete Installation 19" />
+                        <a href="../images/projects/control-alt-deplete/cad4.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad4.jpg" alt="Reclaimed lumber cradle for the tree" />
                         </a>
-                        <a href="../images/projects/control-alt-deplete/cad20.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad20.png" alt="Control Alt Deplete Installation 20" />
+                        <a href="../images/projects/control-alt-deplete/cad1.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad1.jpg" alt="Sensor prototype: hacked lamp wired to a laptop running a Processing MIDI sketch" />
                         </a>
-                        <a href="../images/projects/control-alt-deplete/cad21.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad21.png" alt="Control Alt Deplete Installation 21" />
+                        <a href="../images/projects/control-alt-deplete/cad3.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad3.jpg" alt="Lamp horn with a salvaged speaker and alligator-clipped sensor wiring" />
                         </a>
-                        <a href="../images/projects/control-alt-deplete/cad22.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad22.png" alt="Control Alt Deplete Installation 22" />
+                        <a href="../images/projects/control-alt-deplete/cad7.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad7.jpg" alt="Adafruit Metro Arduino and a scavenged smartwatch on the bench" />
                         </a>
-                        <a href="../images/projects/control-alt-deplete/cad23.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad23.png" alt="Control Alt Deplete Installation 23" />
+                        <a href="../images/projects/control-alt-deplete/cad6.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad6.jpg" alt="Disassembled RCA remote: plastic shell, rubber pad, and circuit board" />
                         </a>
-                        <a href="../images/projects/control-alt-deplete/cad25.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad25.png" alt="Control Alt Deplete Installation 25" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad26.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad26.png" alt="Control Alt Deplete Installation 26" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad27.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad27.png" alt="Control Alt Deplete Installation 27" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad28.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad28.png" alt="Control Alt Deplete Installation 28" />
-                        </a>
-                        <a href="../images/projects/control-alt-deplete/cad29.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad29.png" alt="Control Alt Deplete Installation 29" />
+                        <a href="../images/projects/control-alt-deplete/cad2.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad2.jpg" alt="Jumper-wire bouquet in a green glass bottle" />
                         </a>
                         <a href="../images/projects/control-alt-deplete/cad31.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad31.jpg" alt="Control Alt Deplete Installation 31" />
+                            <img src="../images/projects/control-alt-deplete/cad31.jpg" alt="Dumpster forage for sculpture materials" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad5.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad5.jpg" alt="Control Alt Deplete process photo" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad9.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad9.jpg" alt="Control Alt Deplete process photo" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad11.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad11.jpg" alt="Control Alt Deplete process photo" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad13.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad13.jpg" alt="Control Alt Deplete process photo" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad17.jpg" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad17.jpg" alt="Control Alt Deplete process photo" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad19.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad19.png" alt="Ideation: speaker-tree in a city roundabout" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad20.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad20.png" alt="Ideation: looking up a wired living tree" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad21.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad21.png" alt="Ideation still" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad22.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad22.png" alt="Ideation still" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad23.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad23.png" alt="Ideation: circuit-board tree in a landfill landscape" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad25.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad25.png" alt="Ideation: dead tree in a flooded dump" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad26.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad26.png" alt="Ideation still" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad27.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad27.png" alt="Ideation still" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad28.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad28.png" alt="Ideation still" />
+                        </a>
+                        <a href="../images/projects/control-alt-deplete/cad29.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
+                            <img src="../images/projects/control-alt-deplete/cad29.png" alt="Ideation still" />
                         </a>
                         <a href="../images/projects/control-alt-deplete/cad32.png" class="glightbox" data-gallery="control-alt-deplete-gallery">
-                            <img src="../images/projects/control-alt-deplete/cad32.png" alt="Control Alt Deplete Installation 32" />
+                            <img src="../images/projects/control-alt-deplete/cad32.png" alt="Early sketches and a speaker-plant maquette" />
                         </a>
                     </div>
                     <p style="text-align: center; margin-top: 20px;">
@@ -242,4 +324,4 @@
     <script>const lightbox = GLightbox();</script>
 </body>
 
-</html> 
+</html>
